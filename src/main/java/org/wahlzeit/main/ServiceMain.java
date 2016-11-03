@@ -86,6 +86,15 @@ public class ServiceMain extends ModelMain {
 	}
 
 	/**
+	 * Set this parameter for the EmailServiceTest
+	 * 
+	 * @param isInProduction
+	 */
+	public void setIsInProduction(boolean isInProduction) {
+		this.isInProduction = isInProduction;
+	}
+
+	/**
 	 *
 	 */
 	public void startUp(boolean inProduction, String rootDir) throws Exception {
@@ -217,8 +226,8 @@ public class ServiceMain extends ModelMain {
 	 *
 	 */
 	public void shutDown() throws Exception {
-		//AgentManager am = AgentManager.getInstance();
-		//am.stopAllThreads();
+		// AgentManager am = AgentManager.getInstance();
+		// am.stopAllThreads();
 
 		super.shutDown();
 	}

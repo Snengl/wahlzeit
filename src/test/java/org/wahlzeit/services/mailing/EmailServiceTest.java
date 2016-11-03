@@ -20,6 +20,7 @@
 package org.wahlzeit.services.mailing;
 
 import junit.framework.TestCase;
+import org.wahlzeit.main.ServiceMain;
 import org.wahlzeit.services.EmailAddress;
 
 /**
@@ -37,13 +38,18 @@ public class EmailServiceTest extends TestCase {
 	 */
 	protected EmailAddress validAddress;
 
-
 	/**
+	 * Get the ServiceMain singleton instance and set for this test case 'in
+	 * production' to false. If this parameter is true real Mails will be sent.
+	 * This is not suitable for this test case.
 	 *
 	 */
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
+
+		ServiceMain.getInstance().setIsInProduction(false);
+		;
 
 		emailService = EmailServiceManager.getDefaultService();
 
