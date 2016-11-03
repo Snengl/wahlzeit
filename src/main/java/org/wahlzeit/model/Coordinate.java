@@ -3,13 +3,6 @@ package org.wahlzeit.model;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-/*
- * Coordinate
- * 
- * Version:	1
- * 
- * Date:	26.10.2016
- */
 public class Coordinate {
 
 	private static final Logger LOG = Logger.getLogger(Coordinate.class.getName());
@@ -44,16 +37,17 @@ public class Coordinate {
 		this.longitude = longitude;
 	}
 
-	// returns distance in kilometer
+	/**
+	 * 
+	 * @param coordinateB
+	 * @return distance in kilometer
+	 * 
+	 */
 	public double getDistance(Coordinate coordinateB) {
 
 		/*
 		 * Orthodrome: The shortest distance between two points on a sphere.
-		 * 
-		 * Formular:
-		 * 
-		 * Distance = Radius * acos(sin(phiA) * sin(phiB) + cos(phiA) *
-		 * cos(phiB) * cos(lamdaA - lamdaB)
+		 * Formula and additional information: https://de.wikipedia.org/w/index.php?title=Orthodrome&oldid=156893549
 		 */
 
 		double phiA = Math.toRadians(latitude);

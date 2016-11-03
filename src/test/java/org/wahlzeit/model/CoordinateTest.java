@@ -21,11 +21,11 @@ public class CoordinateTest {
 		double distanceNueMuc = nueremberg.getDistance(munich);
 
 		// Calculated distance between NUE and MUC
-		double distance = 158.94430980922107;
-
-		Assert.assertTrue(distance == distanceMucNue);
-		Assert.assertTrue(distance == distanceNueMuc);
-		Assert.assertTrue(distanceMucNue == distanceNueMuc);
+		double distance = 158;
+		
+		Assert.assertEquals(distance, distanceMucNue, 1.0);
+		Assert.assertEquals(distance, distanceNueMuc, 1.0);
+		Assert.assertEquals(distanceMucNue, distanceNueMuc, 0.0);
 
 	}
 }
