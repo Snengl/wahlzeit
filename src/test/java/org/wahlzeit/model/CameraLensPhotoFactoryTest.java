@@ -2,6 +2,8 @@ package org.wahlzeit.model;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.wahlzeit.model.cameralens.CameraLensPhoto;
+import org.wahlzeit.model.cameralens.CameraLensPhotoFactory;
 
 import com.google.appengine.tools.development.testing.LocalBlobstoreServiceTestConfig;
 import com.google.appengine.tools.development.testing.LocalServiceTestHelper;

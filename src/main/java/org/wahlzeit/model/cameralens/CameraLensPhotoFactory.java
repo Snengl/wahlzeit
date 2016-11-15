@@ -1,7 +1,10 @@
-package org.wahlzeit.model;
+package org.wahlzeit.model.cameralens;
 
 import java.util.logging.Logger;
 
+import org.wahlzeit.model.Photo;
+import org.wahlzeit.model.PhotoFactory;
+import org.wahlzeit.model.PhotoId;
 import org.wahlzeit.services.LogBuilder;
 
 public class CameraLensPhotoFactory extends PhotoFactory {

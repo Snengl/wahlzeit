@@ -1,4 +1,7 @@
-package org.wahlzeit.model;
+package org.wahlzeit.model.cameralens;
+
+import org.wahlzeit.model.Photo;
+import org.wahlzeit.model.PhotoId;
 
 import com.googlecode.objectify.annotation.Entity;
 
