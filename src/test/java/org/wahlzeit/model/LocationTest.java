@@ -11,7 +11,7 @@ public class LocationTest {
 
 	@Test
 	public void coordinateTest() {
-		Location l = new Location(new SphericCoordinate(2.54, 100.35));
+		Location l = new Location(new SphericCoordinate(2.54, 100.35,6371.0));
 
 		SphericCoordinate c = new SphericCoordinate();
 		c.setLatitude(l.coordinate.getLatitude());
