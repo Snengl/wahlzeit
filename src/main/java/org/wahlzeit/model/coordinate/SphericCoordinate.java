@@ -99,6 +99,8 @@ public class SphericCoordinate implements Coordinate {
 		double distance = radius * Math
 				.acos(Math.sin(phiA) * Math.sin(phiB) + (Math.cos(phiA) * Math.cos(phiB) * Math.cos(lamdaA - lambdaB)));
 
+		LOG.log(Level.INFO, "distance: " + distance);
+		
 		return distance;
 	}
 

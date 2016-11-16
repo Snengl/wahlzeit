@@ -97,7 +97,11 @@ public class CartesianCoordinate implements Coordinate {
 		double deltaY = Math.pow(otherCoordinate.getY() - y, 2);
 		double deltaZ = Math.pow(otherCoordinate.getZ() - z, 2);
 
-		return Math.sqrt(deltaX * deltaY * deltaZ);
+		double distance = Math.sqrt(deltaX * deltaY * deltaZ);
+		
+		LOG.log(Level.INFO, "distance: " + distance);
+		
+		return distance;
 	}
 
 }

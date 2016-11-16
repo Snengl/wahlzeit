@@ -6,7 +6,7 @@ import org.junit.runners.Suite.SuiteClasses;
 
 @RunWith(Suite.class)
 @SuiteClasses({ AccessRightsTest.class, CameraLensPhotoTest.class, CameraLensPhotoFactoryTest.class,
-	CameraLensPhotoManagerTest.class, CoordinateTest.class, FlagReasonTest.class, GenderTest.class, GuestTest.class,
+	CameraLensPhotoManagerTest.class, FlagReasonTest.class, GenderTest.class, GuestTest.class,
 		LocationTest.class, PhotoFilterTest.class, TagsTest.class, UserStatusTest.class, ValueTest.class })
 public class AllModelTests {
 
