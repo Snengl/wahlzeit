@@ -3,6 +3,7 @@ package org.wahlzeit.model;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+@Deprecated
 public class Coordinate {
 
 	private static final Logger LOG = Logger.getLogger(Coordinate.class.getName());
@@ -43,6 +44,7 @@ public class Coordinate {
 	 * @return distance in kilometer
 	 * 
 	 */
+	@Deprecated
 	public double getDistance(Coordinate coordinateB) {
 
 		/*
