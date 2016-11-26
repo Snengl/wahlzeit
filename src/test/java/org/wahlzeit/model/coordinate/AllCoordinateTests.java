@@ -5,7 +5,7 @@ import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
 @RunWith(Suite.class)
-@SuiteClasses({CartesianCoordinateTest.class, SphericCoordinateTest.class})
+@SuiteClasses({ AbstractCoordiante.class, CartesianCoordinateTest.class, SphericCoordinateTest.class })
 public class AllCoordinateTests {
 
 }

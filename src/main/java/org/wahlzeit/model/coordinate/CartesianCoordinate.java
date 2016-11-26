@@ -1,11 +1,6 @@
 package org.wahlzeit.model.coordinate;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
-public class CartesianCoordinate implements Coordinate {
-	private static final Logger LOG = Logger.getLogger(CartesianCoordinate.class.getName());
-
+public class CartesianCoordinate extends AbstractCoordiante {
 	private double x;
 	private double y;
 	private double z;
@@ -42,66 +37,13 @@ public class CartesianCoordinate implements Coordinate {
 		return z;
 	}
 
-	
 	public void setZ(double z) {
 		this.z = z;
 	}
 
 	@Override
-	public double getDistance(Coordinate coordinate) {
-		LOG.log(Level.INFO, "get distance");
-
-		// make this method great again (next time i will use a helper class [some more beauty])
-		if (coordinate instanceof SphericCoordinate) {
-			return calculateDistance(convertSphericToCartesian((SphericCoordinate) coordinate));
-		} else if (coordinate instanceof CartesianCoordinate) {
-			return calculateDistance((CartesianCoordinate) coordinate);
-		} else {
-			throw new IllegalArgumentException("Unknownw coordinate type");
-		}
-
-	}
-
-	/**
-	 * Converts a spheric coordintae to a cartesian coordinate
-	 * @param sphericCoordinate
-	 * @return {@link CartesianCoordinate}
-	 */
-	public CartesianCoordinate convertSphericToCartesian(SphericCoordinate sphericCoordinate) {
-		LOG.log(Level.INFO, "convert spheric coordinate to cartesian coordinate");
-
-		CartesianCoordinate cartesianCoordinate = new CartesianCoordinate();
-
-		double x = sphericCoordinate.radius * Math.cos(sphericCoordinate.latitude);
-		double y = sphericCoordinate.radius * Math.sin(sphericCoordinate.longitude);
-
-		cartesianCoordinate.setX(x);
-		cartesianCoordinate.setY(y);
-
-		return cartesianCoordinate;
-	}
-
-	/**
-	 * 
-	 * @param cartesianCoordinate
-	 * @return distance
-	 */
-	public double calculateDistance(CartesianCoordinate otherCoordinate) {
-		LOG.log(Level.INFO, "calculate cartesian distance");
-
-		/*
-		 * Formula and additional information: https://en.wikipedia.org/w/index.php?title=Distance&oldid=747860001
-		 */
-		
-		double deltaX = Math.pow(otherCoordinate.getX() - x, 2);
-		double deltaY = Math.pow(otherCoordinate.getY() - y, 2);
-		double deltaZ = Math.pow(otherCoordinate.getZ() - z, 2);
-
-		double distance = Math.sqrt(deltaX * deltaY * deltaZ);
-		
-		LOG.log(Level.INFO, "distance: " + distance);
-		
-		return distance;
+	public CartesianCoordinate asCartesianCoordinate() {
+		return this;
 	}
 
 }
