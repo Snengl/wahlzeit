@@ -3,7 +3,7 @@ package org.wahlzeit.model.coordinate;
 public interface Coordinate {
 
 	/**
-	 * 
+	 * @methodtype query
 	 * @param coordinate
 	 * @return distance in kilometer
 	 */

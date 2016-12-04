@@ -53,6 +53,12 @@ public class SphericCoordinateTest {
 	}
 
 	@Test(expected = IllegalArgumentException.class)
+	public void radiusValueTest() {
+		SphericCoordinate coordinate = new SphericCoordinate();
+		coordinate.setRadius(-1);
+	}
+
+	@Test(expected = IllegalArgumentException.class)
 	public void constructorTest() {
 		SphericCoordinate coordinate = new SphericCoordinate(-95.25, 159.03, 0.0);
 	}
