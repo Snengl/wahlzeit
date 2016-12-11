@@ -2,7 +2,10 @@ package org.wahlzeit.model;
 
 import org.junit.Assert;
 import org.junit.Test;
+import org.wahlzeit.model.coordinate.CoordinateDistanceException;
+import org.wahlzeit.model.coordinate.CoordinateParameterException;
 import org.wahlzeit.model.coordinate.SphericCoordinate;
+import org.wahlzeit.model.coordinate.UnknownCoordinateException;
 
 /**
  * Test for the Location class.
@@ -11,11 +14,20 @@ public class LocationTest {
 
 	@Test
 	public void coordinateTest() {
-		Location l = new Location(new SphericCoordinate(2.54, 100.35,6371.0));
+		Location l = null;
+		try {
+			l = new Location(new SphericCoordinate(2.54, 100.35, 6371.0));
+		} catch (CoordinateParameterException e) {
+			e.printStackTrace();
+		}
 
 		SphericCoordinate c = new SphericCoordinate();
-		c.setLatitude(l.coordinate.getLatitude());
-		c.setLongitude(l.coordinate.getLongitude());
+		try {
+			c.setLatitude(l.coordinate.getLatitude());
+			c.setLongitude(l.coordinate.getLongitude());
+		} catch (CoordinateParameterException e) {
+			e.printStackTrace();
+		}
 
 		Assert.assertTrue(
 				l.coordinate.getLatitude() == c.getLatitude() && l.coordinate.getLongitude() == c.getLongitude());
@@ -23,14 +35,29 @@ public class LocationTest {
 
 	@Test
 	public void getDistanceWithLocations() {
-		Location nuremberg = new Location(49.450520, 11.080480);
-		Location munich = new Location(48.137428, 11.575490);
+		Location nuremberg = null;
+		Location munich = null;
+		
+		try {
+			nuremberg = new Location(49.450520, 11.080480);
+			munich = new Location(48.137428, 11.575490);
+		} catch (CoordinateParameterException e1) {
+			e1.printStackTrace();
+		}
 
-		double distanceMucNue = munich.getDistance(nuremberg);
-		double distanceNueMuc = nuremberg.getDistance(munich);
+		double distanceMucNue = 0;
+		double distanceNueMuc = 0;
+		
+		try {
+			distanceMucNue = munich.getDistance(nuremberg);
+			distanceNueMuc = nuremberg.getDistance(munich);
+		} catch (CoordinateParameterException | CoordinateDistanceException | UnknownCoordinateException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
-		// Calculated distance between NUE and MUC
-		double distance = 150;
+		// Calculated cartesian distance between NUE and MUC
+		double distance = 62;
 
 		Assert.assertEquals(distance, distanceMucNue, 1.0);
 		Assert.assertEquals(distance, distanceNueMuc, 1.0);

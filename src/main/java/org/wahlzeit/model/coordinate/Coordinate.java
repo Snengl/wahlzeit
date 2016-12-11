@@ -6,10 +6,11 @@ public interface Coordinate {
 	 * @methodtype query
 	 * @param coordinate
 	 * @return distance in kilometer
+	 * @throws CoordinateDistanceException 
 	 */
-	public double getDistance(Coordinate otherCoordinate);
+	public double getDistance(Coordinate otherCoordinate) throws UnknownCoordinateException, CoordinateParameterException, CoordinateDistanceException;
 	
-	public boolean isEqual(Coordinate otherCoordinate);
+	public boolean isEqual(Coordinate otherCoordinate) throws UnknownCoordinateException, CoordinateParameterException;
 
-	public CartesianCoordinate asCartesianCoordinate();
+	public CartesianCoordinate asCartesianCoordinate() throws CoordinateParameterException;
 }

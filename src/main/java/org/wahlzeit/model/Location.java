@@ -1,6 +1,9 @@
 package org.wahlzeit.model;
 
+import org.wahlzeit.model.coordinate.CoordinateDistanceException;
+import org.wahlzeit.model.coordinate.CoordinateParameterException;
 import org.wahlzeit.model.coordinate.SphericCoordinate;
+import org.wahlzeit.model.coordinate.UnknownCoordinateException;
 
 public class Location {
 
@@ -10,11 +13,16 @@ public class Location {
 		this.coordinate = coordinate;
 	}
 
-	public Location(double latitude, double longitude) {
+	public Location(double latitude, double longitude) throws CoordinateParameterException {
 		this.coordinate = new SphericCoordinate(latitude, longitude, 6371.0);
 	}
+	
+	public Location(double latitude, double longitude, double radius) throws CoordinateParameterException {
+		this.coordinate = new SphericCoordinate(latitude, longitude, radius);
+	}
 
-	public double getDistance(Location locationB) {
+	public double getDistance(Location locationB)
+			throws UnknownCoordinateException, CoordinateParameterException, CoordinateDistanceException {
 		return coordinate.getDistance(locationB.coordinate);
 	}
 

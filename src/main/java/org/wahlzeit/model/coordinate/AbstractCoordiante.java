@@ -6,16 +6,22 @@ public abstract class AbstractCoordiante implements Coordinate {
 	 * @methodtype query
 	 * @param coordinate
 	 * @return distance in kilometer
+	 * @throws CoordinateParameterException
+	 * @throws CoordinateDistanceException
 	 */
-	public double getDistance(Coordinate otherCoordinate) {
+	public double getDistance(Coordinate otherCoordinate)
+			throws UnknownCoordinateException, CoordinateParameterException, CoordinateDistanceException {
+
+		// check invariants
+		assertClassInvariants();
+
+		// precondition
+		assertNotNull(otherCoordinate);
 
 		/*
 		 * Formula and additional information:
 		 * https://en.wikipedia.org/w/index.php?title=Distance&oldid=747860001
 		 */
-
-		// precondition
-		assertNotNull(otherCoordinate);
 
 		CartesianCoordinate cartesianCoordinateA = this.asCartesianCoordinate();
 		CartesianCoordinate cartesianCoordinateB = otherCoordinate.asCartesianCoordinate();
@@ -33,7 +39,10 @@ public abstract class AbstractCoordiante implements Coordinate {
 		return distance;
 	}
 
-	public boolean isEqual(Coordinate otherCoordinate) {
+	public boolean isEqual(Coordinate otherCoordinate) throws UnknownCoordinateException, CoordinateParameterException {
+
+		// check invariants
+		assertClassInvariants();
 
 		// precondition
 		assertNotNull(otherCoordinate);
@@ -57,34 +66,36 @@ public abstract class AbstractCoordiante implements Coordinate {
 
 		// postcondition
 		assertClassInvariants();
-		
+
 		return false;
 	}
 
-	public abstract CartesianCoordinate asCartesianCoordinate();
+	public abstract CartesianCoordinate asCartesianCoordinate() throws CoordinateParameterException;
 
 	/**
+	 * @throws UnknownCoordinateException
 	 * @methodtype assertion
 	 */
-	protected void assertNotNull(Coordinate otherCoordinate) {
+	protected void assertNotNull(Coordinate otherCoordinate) throws UnknownCoordinateException {
 		if (otherCoordinate == null) {
-			throw new IllegalArgumentException("Other coordinate is null!");
+			throw new UnknownCoordinateException("Coordinate is null!");
 		}
 	}
 
 	/**
 	 * @methodtype assertion
 	 */
-	protected void assertIsValidDistance(double distance) {
+	protected void assertIsValidDistance(double distance) throws CoordinateDistanceException {
 		if (distance < 0) {
-			throw new IllegalArgumentException("Calculated distance is smaller than zero.");
+			throw new CoordinateDistanceException("Calculated distance is smaller than zero.");
 		}
 	}
 
 	/**
+	 * @throws CoordinateParameterException
 	 * @methodtype assertion
 	 */
-	protected void assertClassInvariants() {
+	protected void assertClassInvariants() throws CoordinateParameterException {
 		// This method is not required in this abstract class (no state)
 	}
 

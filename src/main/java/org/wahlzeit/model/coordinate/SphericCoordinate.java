@@ -11,7 +11,7 @@ public class SphericCoordinate extends AbstractCoordiante {
 		this.radius = 0.0;
 	}
 
-	public SphericCoordinate(double latitude, double longitude, double radius) throws IllegalArgumentException {
+	public SphericCoordinate(double latitude, double longitude, double radius) throws CoordinateParameterException {
 
 		// preconditions
 		assertIsValidLatitude(latitude);
@@ -30,7 +30,8 @@ public class SphericCoordinate extends AbstractCoordiante {
 		return latitude;
 	}
 
-	public void setLatitude(double latitude) {
+	public void setLatitude(double latitude) throws CoordinateParameterException {
+
 		// precondition
 		assertIsValidLatitude(latitude);
 
@@ -44,7 +45,8 @@ public class SphericCoordinate extends AbstractCoordiante {
 		return longitude;
 	}
 
-	public void setLongitude(double longitude) {
+	public void setLongitude(double longitude) throws CoordinateParameterException {
+
 		// precondition
 		assertIsValidLongitude(longitude);
 
@@ -58,7 +60,8 @@ public class SphericCoordinate extends AbstractCoordiante {
 		return radius;
 	}
 
-	public void setRadius(double radius) {
+	public void setRadius(double radius) throws CoordinateParameterException {
+
 		// precondition
 		assertIsValidRadius(radius);
 
@@ -69,11 +72,12 @@ public class SphericCoordinate extends AbstractCoordiante {
 	}
 
 	@Override
-	public CartesianCoordinate asCartesianCoordinate() {
+	public CartesianCoordinate asCartesianCoordinate() throws CoordinateParameterException {
 
 		/*
 		 * Formula and additional information:
-		 * https://en.wikipedia.org/w/index.php?title=Spherical_coordinate_system&oldid=748510862
+		 * https://en.wikipedia.org/w/index.php?title=
+		 * Spherical_coordinate_system&oldid=748510862
 		 */
 
 		// preconditions
@@ -97,37 +101,41 @@ public class SphericCoordinate extends AbstractCoordiante {
 	}
 
 	/**
+	 * @throws CoordinateParameterException
 	 * @methodtype assertion
 	 */
-	private void assertIsValidLatitude(double latitude) {
+	private void assertIsValidLatitude(double latitude) throws CoordinateParameterException {
 		if (latitude < -90 || latitude > 90 || Double.isNaN(latitude)) {
-			throw new IllegalArgumentException("BadumTss: Bad latitude.");
+			throw new CoordinateParameterException("BadumTss: Bad latitude.");
 		}
 	}
 
 	/**
+	 * @throws CoordinateParameterException
 	 * @methodtype assertion
 	 */
-	private void assertIsValidLongitude(double longitude) {
+	private void assertIsValidLongitude(double longitude) throws CoordinateParameterException {
 		if (longitude < -180 || longitude > 180 || Double.isNaN(longitude)) {
-			throw new IllegalArgumentException("BadumTss: Bad longitude.");
+			throw new CoordinateParameterException("BadumTss: Bad longitude.");
 		}
 	}
 
 	/**
+	 * @throws CoordinateParameterException
 	 * @methodtype assertion
 	 */
-	private void assertIsValidRadius(double radius) {
+	private void assertIsValidRadius(double radius) throws CoordinateParameterException {
 		if (radius < 0 || Double.isNaN(radius)) {
-			throw new IllegalArgumentException("BadumTss: Bad radius.");
+			throw new CoordinateParameterException("BadumTss: Bad radius.");
 		}
 	}
 
 	/**
 	 * @methodtype assertion
 	 */
-	protected void assertClassInvariants() {
+	protected void assertClassInvariants() throws CoordinateParameterException {
 		super.assertClassInvariants();
+
 		assertIsValidLatitude(this.latitude);
 		assertIsValidLongitude(this.longitude);
 		assertIsValidRadius(this.radius);

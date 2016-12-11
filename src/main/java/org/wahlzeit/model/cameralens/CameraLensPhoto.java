@@ -2,6 +2,7 @@ package org.wahlzeit.model.cameralens;
 
 import org.wahlzeit.model.Photo;
 import org.wahlzeit.model.PhotoId;
+import org.wahlzeit.model.coordinate.CoordinateParameterException;
 
 import com.googlecode.objectify.annotation.Entity;
 
@@ -33,10 +34,16 @@ public class CameraLensPhoto extends Photo {
 	}
 
 	/**
+	 * @throws CameraCorporationException 
+	 * @throws CameraLensTypeException 
 	 * @methodtype constructor
 	 */
-	public CameraLensPhoto(PhotoId id, CameraLensCorporation corporation, CameraLensType lensType) {
+	public CameraLensPhoto(PhotoId id, CameraLensCorporation corporation, CameraLensType lensType) throws CameraCorporationException, CameraLensTypeException {
 		super(id);
+
+		// preconditions
+		assertLensCorporation(corporation);
+		assertLensType(lensType);
 		this.corporation = corporation;
 		this.lensType = lensType;
 	}
@@ -95,6 +102,18 @@ public class CameraLensPhoto extends Photo {
 	 */
 	public void setFocalLength(String focalLength) {
 		this.focalLength = focalLength;
+	}
+
+	private void assertLensCorporation(CameraLensCorporation corporation) throws CameraCorporationException {
+		if (corporation == null) {
+			throw new CameraCorporationException("Camera corporation is null!");
+		}
+	}
+
+	private void assertLensType(CameraLensType type) throws CameraLensTypeException {
+		if (type == null) {
+			throw new CameraLensTypeException("Camera lens type is null!");
+		}
 	}
 
 }

@@ -14,21 +14,40 @@ public class CartesianCoordinateTest {
 
 	@Before
 	public void setUp() {
-		a = new CartesianCoordinate(0.0, 0.0, 0.0);
-		b = new CartesianCoordinate(1.0, 1.0, 1.0);
-		distance = 1.0;
+		try {
+			a = new CartesianCoordinate(0.0, 0.0, 0.0);
+			b = new CartesianCoordinate(1.0, 1.0, 1.0);
+		} catch (CoordinateParameterException e) {
+			/*
+			 * Wenn der Code nicht mehr so statisch ist:
+			 * Besseres Error-Handling anwenden.
+			 */
+			e.printStackTrace();
+		}
+		distance = 1.73;
 	}
 
 	@Test
 	public void getCartesianDistanceTest() {
 
-		double distanceAtoB = a.getDistance(b);
-		double distanceBtoA = b.getDistance(a);
+		double distanceAtoB = 0;
+		double distanceBtoA = 0;
+		
+		try {
+			distanceAtoB = a.getDistance(b);
+			distanceBtoA = b.getDistance(a);
+		} catch (UnknownCoordinateException | CoordinateParameterException | CoordinateDistanceException e) {
+			/*
+			 * Wenn der Code nicht mehr so statisch ist:
+			 * Besseres Error-Handling anwenden.
+			 */
+			e.printStackTrace();
+		}
 
-		Assert.assertEquals(distance, distanceAtoB, 0.0);
-		Assert.assertEquals(distance, distanceBtoA, 0.0);
-		Assert.assertEquals(distanceAtoB, distanceBtoA, 0.0);
+
+		Assert.assertEquals(distance, distanceAtoB, 0.005);
+		Assert.assertEquals(distance, distanceBtoA, 0.005);
+		Assert.assertEquals(distanceAtoB, distanceBtoA, 0.005);
 	}
-
 
 }
