@@ -61,37 +61,32 @@ public class SphericCoordinateTest {
 
 	@Test(expected = CoordinateParameterException.class)
 	public void LatiduteValueTest1() throws CoordinateParameterException {
-		SphericCoordinate coordinate = new SphericCoordinate();
-		coordinate.setLatitude(195);
+		new SphericCoordinate(195,0,1);
 	}
 
 	@Test(expected = CoordinateParameterException.class)
 	public void LatiduteValueTest2() throws CoordinateParameterException {
-		SphericCoordinate coordinate = new SphericCoordinate();
-		coordinate.setLatitude(-90.0000009);
+		new SphericCoordinate(-90.00000009, 0, 1);
 	}
 
 	@Test(expected = CoordinateParameterException.class)
 	public void LongitudeValueTest1() throws CoordinateParameterException {
-		SphericCoordinate coordinate = new SphericCoordinate();
-		coordinate.setLongitude(195);
+		new SphericCoordinate(0, 195, 1);
 	}
 
 	@Test(expected = CoordinateParameterException.class)
 	public void LongitudeValueTest2() throws CoordinateParameterException {
-		SphericCoordinate coordinate = new SphericCoordinate();
-		coordinate.setLongitude(-180.0000009);
+		new SphericCoordinate(0, -180.0000009, 1);
 	}
 
 	@Test(expected = CoordinateParameterException.class)
 	public void radiusValueTest() throws CoordinateParameterException {
-		SphericCoordinate coordinate = new SphericCoordinate();
-		coordinate.setRadius(-1);
+		new SphericCoordinate(0,0,-1);
 	}
 
 	@Test(expected = CoordinateParameterException.class)
 	public void constructorTest() throws CoordinateParameterException {
-		SphericCoordinate coordinate = new SphericCoordinate(-95.25, 159.03, 0.0);
+		new SphericCoordinate(-95.25, 159.03, 0.0);
 	}
 
 }

@@ -1,15 +1,9 @@
 package org.wahlzeit.model.coordinate;
 
 public class SphericCoordinate extends AbstractCoordiante {
-	protected double latitude;
-	protected double longitude;
-	protected double radius;
-
-	public SphericCoordinate() {
-		this.latitude = 0.0;
-		this.longitude = 0.0;
-		this.radius = 0.0;
-	}
+	protected final double latitude;
+	protected final double longitude;
+	protected final double radius;
 
 	public SphericCoordinate(double latitude, double longitude, double radius) throws CoordinateParameterException {
 
@@ -27,50 +21,18 @@ public class SphericCoordinate extends AbstractCoordiante {
 	}
 
 	public double getLatitude() {
-		return latitude;
-	}
-
-	public void setLatitude(double latitude) throws CoordinateParameterException {
-
-		// precondition
-		assertIsValidLatitude(latitude);
-
-		this.latitude = latitude;
-
-		// postcondition
-		assertClassInvariants();
+		return this.latitude;
 	}
 
 	public double getLongitude() {
-		return longitude;
+		return this.longitude;
 	}
-
-	public void setLongitude(double longitude) throws CoordinateParameterException {
-
-		// precondition
-		assertIsValidLongitude(longitude);
-
-		this.longitude = longitude;
-
-		// postcondition
-		assertClassInvariants();
-	}
-
+	
 	public double getRadius() {
-		return radius;
+		return this.radius;
 	}
 
-	public void setRadius(double radius) throws CoordinateParameterException {
-
-		// precondition
-		assertIsValidRadius(radius);
-
-		this.radius = radius;
-
-		// postcondition
-		assertClassInvariants();
-	}
-
+	
 	@Override
 	public CartesianCoordinate asCartesianCoordinate() throws CoordinateParameterException {
 
@@ -85,16 +47,12 @@ public class SphericCoordinate extends AbstractCoordiante {
 		assertIsValidLongitude(longitude);
 		assertIsValidRadius(radius);
 
-		CartesianCoordinate cartesianCoordinate = new CartesianCoordinate();
-
 		double x = radius * Math.sin(Math.toRadians(longitude)) * Math.cos(Math.toRadians(latitude));
 		double y = radius * Math.sin(Math.toRadians(longitude)) * Math.sin(Math.toRadians(latitude));
 		double z = radius * Math.cos(Math.toRadians(longitude));
 
-		cartesianCoordinate.setX(x);
-		cartesianCoordinate.setY(y);
-		cartesianCoordinate.setZ(z);
-
+		CartesianCoordinate cartesianCoordinate = new CartesianCoordinate(x, y, z);
+		
 		cartesianCoordinate.assertClassInvariants();
 
 		return cartesianCoordinate;
@@ -140,5 +98,37 @@ public class SphericCoordinate extends AbstractCoordiante {
 		assertIsValidLongitude(this.longitude);
 		assertIsValidRadius(this.radius);
 	}
+
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		long temp;
+		temp = Double.doubleToLongBits(latitude);
+		result = prime * result + (int) (temp ^ (temp >>> 32));
+		temp = Double.doubleToLongBits(longitude);
+		result = prime * result + (int) (temp ^ (temp >>> 32));
+		temp = Double.doubleToLongBits(radius);
+		result = prime * result + (int) (temp ^ (temp >>> 32));
+		return result;
+	}
+
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		SphericCoordinate other = (SphericCoordinate) obj;
+		if (Double.doubleToLongBits(latitude) != Double.doubleToLongBits(other.latitude))
+			return false;
+		if (Double.doubleToLongBits(longitude) != Double.doubleToLongBits(other.longitude))
+			return false;
+		if (Double.doubleToLongBits(radius) != Double.doubleToLongBits(other.radius))
+			return false;
+		return true;
+	}
+	
+	
 
 }

@@ -21,10 +21,9 @@ public class LocationTest {
 			e.printStackTrace();
 		}
 
-		SphericCoordinate c = new SphericCoordinate();
+		SphericCoordinate c = null;
 		try {
-			c.setLatitude(l.coordinate.getLatitude());
-			c.setLongitude(l.coordinate.getLongitude());
+			c = new SphericCoordinate(l.coordinate.getLatitude(), l.coordinate.getLongitude(), 1);
 		} catch (CoordinateParameterException e) {
 			e.printStackTrace();
 		}

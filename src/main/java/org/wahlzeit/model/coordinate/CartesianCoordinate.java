@@ -1,15 +1,9 @@
 package org.wahlzeit.model.coordinate;
 
 public class CartesianCoordinate extends AbstractCoordiante {
-	private double x;
-	private double y;
-	private double z;
-
-	public CartesianCoordinate() {
-		this.x = 0.0;
-		this.y = 0.0;
-		this.z = 0.0;
-	}
+	private final double x;
+	private final double y;
+	private final double z;
 
 	public CartesianCoordinate(double x, double y, double z) throws CoordinateParameterException {
 
@@ -27,45 +21,15 @@ public class CartesianCoordinate extends AbstractCoordiante {
 	}
 
 	public double getX() {
-		return x;
-	}
-
-	public void setX(double x) throws CoordinateParameterException {
-		// precondition
-		assertIsValidX(x);
-
-		this.x = x;
-
-		// postcondition
-		assertClassInvariants();
+		return this.x;
 	}
 
 	public double getY() {
-		return y;
-	}
-
-	public void setY(double y) throws CoordinateParameterException {
-		// precondition
-		assertIsValidY(y);
-
-		this.y = y;
-
-		// postcondition
-		assertClassInvariants();
+		return this.y;
 	}
 
 	public double getZ() {
-		return z;
-	}
-
-	public void setZ(double z) throws CoordinateParameterException {
-		// precondition
-		assertIsValidZ(z);
-
-		this.z = z;
-
-		// postcondition
-		assertClassInvariants();
+		return this.z;
 	}
 
 	@Override
@@ -109,6 +73,36 @@ public class CartesianCoordinate extends AbstractCoordiante {
 		assertIsValidX(this.x);
 		assertIsValidY(this.y);
 		assertIsValidZ(this.z);
+	}
+
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		long temp;
+		temp = Double.doubleToLongBits(x);
+		result = prime * result + (int) (temp ^ (temp >>> 32));
+		temp = Double.doubleToLongBits(y);
+		result = prime * result + (int) (temp ^ (temp >>> 32));
+		temp = Double.doubleToLongBits(z);
+		result = prime * result + (int) (temp ^ (temp >>> 32));
+		return result;
+	}
+
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		CartesianCoordinate other = (CartesianCoordinate) obj;
+		if (Double.doubleToLongBits(x) != Double.doubleToLongBits(other.x))
+			return false;
+		if (Double.doubleToLongBits(y) != Double.doubleToLongBits(other.y))
+			return false;
+		if (Double.doubleToLongBits(z) != Double.doubleToLongBits(other.z))
+			return false;
+		return true;
 	}
 
 }
