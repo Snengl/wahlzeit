@@ -16,8 +16,8 @@ public class SphericCoordinateTest {
 	@Before
 	public void setUp() {
 		try {
-			munich = new SphericCoordinate(48.137428, 11.575490, 6731.0);
-			nuremberg = new SphericCoordinate(49.450520, 11.080480, 6731.0);
+			munich = SphericCoordinate.getInstance(48.137428, 11.575490, 6731.0);
+			nuremberg = SphericCoordinate.getInstance(49.450520, 11.080480, 6731.0);
 		} catch (CoordinateParameterException e) {
 			e.printStackTrace();
 		}
@@ -61,32 +61,32 @@ public class SphericCoordinateTest {
 
 	@Test(expected = CoordinateParameterException.class)
 	public void LatiduteValueTest1() throws CoordinateParameterException {
-		new SphericCoordinate(195,0,1);
+		SphericCoordinate.getInstance(195, 0, 1);
 	}
 
 	@Test(expected = CoordinateParameterException.class)
 	public void LatiduteValueTest2() throws CoordinateParameterException {
-		new SphericCoordinate(-90.00000009, 0, 1);
+		SphericCoordinate.getInstance(-90.00000009, 0, 1);
 	}
 
 	@Test(expected = CoordinateParameterException.class)
 	public void LongitudeValueTest1() throws CoordinateParameterException {
-		new SphericCoordinate(0, 195, 1);
+		SphericCoordinate.getInstance(0, 195, 1);
 	}
 
 	@Test(expected = CoordinateParameterException.class)
 	public void LongitudeValueTest2() throws CoordinateParameterException {
-		new SphericCoordinate(0, -180.0000009, 1);
+		SphericCoordinate.getInstance(0, -180.0000009, 1);
 	}
 
 	@Test(expected = CoordinateParameterException.class)
 	public void radiusValueTest() throws CoordinateParameterException {
-		new SphericCoordinate(0,0,-1);
+		SphericCoordinate.getInstance(0, 0, -1);
 	}
 
 	@Test(expected = CoordinateParameterException.class)
 	public void constructorTest() throws CoordinateParameterException {
-		new SphericCoordinate(-95.25, 159.03, 0.0);
+		SphericCoordinate.getInstance(-95.25, 159.03, 0.0);
 	}
 
 }

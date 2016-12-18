@@ -1,11 +1,16 @@
 package org.wahlzeit.model.coordinate;
 
+import java.util.HashMap;
+
 public class SphericCoordinate extends AbstractCoordiante {
+	
+	private static final HashMap<Integer, SphericCoordinate> coordinate = new HashMap<>();
+	
 	protected final double latitude;
 	protected final double longitude;
 	protected final double radius;
 
-	public SphericCoordinate(double latitude, double longitude, double radius) throws CoordinateParameterException {
+	private SphericCoordinate(double latitude, double longitude, double radius) throws CoordinateParameterException {
 
 		// preconditions
 		assertIsValidLatitude(latitude);
@@ -18,6 +23,21 @@ public class SphericCoordinate extends AbstractCoordiante {
 
 		// postcondition
 		assertClassInvariants();
+	}
+	
+	public static SphericCoordinate getInstance(double latitude, double longitude, double radius) throws CoordinateParameterException {
+
+		SphericCoordinate sphericCoordinate = new SphericCoordinate(latitude, longitude, radius);
+		
+		synchronized (coordinate) {
+			if(!coordinate.containsKey(sphericCoordinate.hashCode())){
+				coordinate.put(sphericCoordinate.hashCode(), sphericCoordinate);
+				return sphericCoordinate;
+			}
+			else{
+				return coordinate.get(sphericCoordinate.hashCode());
+			}
+		}
 	}
 
 	public double getLatitude() {
@@ -51,7 +71,7 @@ public class SphericCoordinate extends AbstractCoordiante {
 		double y = radius * Math.sin(Math.toRadians(longitude)) * Math.sin(Math.toRadians(latitude));
 		double z = radius * Math.cos(Math.toRadians(longitude));
 
-		CartesianCoordinate cartesianCoordinate = new CartesianCoordinate(x, y, z);
+		CartesianCoordinate cartesianCoordinate = CartesianCoordinate.getInstance(x, y, z);
 		
 		cartesianCoordinate.assertClassInvariants();
 

@@ -16,14 +16,14 @@ public class LocationTest {
 	public void coordinateTest() {
 		Location l = null;
 		try {
-			l = new Location(new SphericCoordinate(2.54, 100.35, 6371.0));
+			l = new Location(SphericCoordinate.getInstance(2.54, 100.35, 6371.0));
 		} catch (CoordinateParameterException e) {
 			e.printStackTrace();
 		}
 
 		SphericCoordinate c = null;
 		try {
-			c = new SphericCoordinate(l.coordinate.getLatitude(), l.coordinate.getLongitude(), 1);
+			c = SphericCoordinate.getInstance(l.coordinate.getLatitude(), l.coordinate.getLongitude(), 1);
 		} catch (CoordinateParameterException e) {
 			e.printStackTrace();
 		}

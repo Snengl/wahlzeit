@@ -12,8 +12,8 @@ public class AbstractCoordinateTest {
 	@Before
 	public void setUp() {
 		try {
-			cartesianCoordinate = new CartesianCoordinate(1, 1, 1);
-			sphericCoordinate = new SphericCoordinate(0, 0, 0);
+			cartesianCoordinate = CartesianCoordinate.getInstance(1, 1, 1);
+			sphericCoordinate = SphericCoordinate.getInstance(0, 0, 0);
 		} catch (CoordinateParameterException e) {
 			e.printStackTrace();
 		}

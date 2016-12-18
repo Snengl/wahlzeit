@@ -1,11 +1,17 @@
 package org.wahlzeit.model.coordinate;
 
+import java.util.HashMap;
+import java.util.HashSet;
+
 public class CartesianCoordinate extends AbstractCoordiante {
+
+	private static final HashMap<Integer, CartesianCoordinate> coordinate = new HashMap<>();
+
 	private final double x;
 	private final double y;
 	private final double z;
 
-	public CartesianCoordinate(double x, double y, double z) throws CoordinateParameterException {
+	private CartesianCoordinate(double x, double y, double z) throws CoordinateParameterException {
 
 		// preconditions
 		assertIsValidX(x);
@@ -18,6 +24,21 @@ public class CartesianCoordinate extends AbstractCoordiante {
 
 		// postcondition
 		assertClassInvariants();
+	}
+
+	public static CartesianCoordinate getInstance(double x, double y, double z) throws CoordinateParameterException {
+
+		CartesianCoordinate cartesianCoordinate = new CartesianCoordinate(x, y, z);
+		
+		synchronized (coordinate) {
+			if(!coordinate.containsKey(cartesianCoordinate.hashCode())){
+				coordinate.put(cartesianCoordinate.hashCode(), cartesianCoordinate);
+				return cartesianCoordinate;
+			}
+			else{
+				return coordinate.get(cartesianCoordinate.hashCode());
+			}
+		}
 	}
 
 	public double getX() {

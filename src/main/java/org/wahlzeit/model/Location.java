@@ -14,11 +14,11 @@ public class Location {
 	}
 
 	public Location(double latitude, double longitude) throws CoordinateParameterException {
-		this.coordinate = new SphericCoordinate(latitude, longitude, 6371.0);
+		this.coordinate = SphericCoordinate.getInstance(latitude, longitude, 6371.0);
 	}
 	
 	public Location(double latitude, double longitude, double radius) throws CoordinateParameterException {
-		this.coordinate = new SphericCoordinate(latitude, longitude, radius);
+		this.coordinate = SphericCoordinate.getInstance(latitude, longitude, radius);
 	}
 
 	public double getDistance(Location locationB)
