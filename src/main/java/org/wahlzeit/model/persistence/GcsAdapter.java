@@ -32,6 +32,7 @@ import com.google.appengine.tools.cloudstorage.GcsServiceFactory;
 import com.google.appengine.tools.cloudstorage.RetryParams;
 import org.wahlzeit.services.LogBuilder;
 import org.wahlzeit.services.SysConfig;
+import org.wahlzeit.utils.Pattern;
 
 import java.io.File;
 import java.io.IOException;
@@ -151,7 +152,7 @@ public class GcsAdapter extends ImageStorage {
 		return new GcsFilename(bucketName, filePath);
 	}
 
-
+	@Pattern(name = "Builder", participants = { "Builder", "ConcreteBuilder" })
 	public static class Builder {
 		GcsService gcsService;
 		private String bucketName;

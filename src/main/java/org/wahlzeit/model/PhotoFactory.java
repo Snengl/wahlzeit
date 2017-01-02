@@ -21,12 +21,16 @@
 package org.wahlzeit.model;
 
 import org.wahlzeit.services.LogBuilder;
+import org.wahlzeit.utils.Pattern;
 
 import java.util.logging.Logger;
+
+import javax.annotation.MatchesPattern;
 
 /**
  * An Abstract Factory for creating photos and related objects.
  */
+@Pattern(name="Abstract Factory", participants={"AbstractFactory", "ConcreteFactory"})
 public class PhotoFactory {
 
 	private static final Logger log = Logger.getLogger(PhotoFactory.class.getName());
