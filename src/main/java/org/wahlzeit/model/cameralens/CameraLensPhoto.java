@@ -11,13 +11,7 @@ public class CameraLensPhoto extends Photo {
 
 	private static final long serialVersionUID = 2433819754308655968L;
 
-	public static final String CORPORATION = "corporation";
-	public static final String LENSTYPE = "lenstype";
-
-	private CameraLensCorporation corporation;
-	private CameraLensType lensType;
-	private String aperture;
-	private String focalLength;
+	private CameraLens cameraLens;
 
 	/**
 	 * @methodtype constructor
@@ -34,86 +28,38 @@ public class CameraLensPhoto extends Photo {
 	}
 
 	/**
-	 * @throws CameraCorporationException 
-	 * @throws CameraLensTypeException 
+	 * @throws CameraCorporationException
+	 * @throws CameraLensTypeException
 	 * @methodtype constructor
 	 */
-	public CameraLensPhoto(PhotoId id, CameraLensCorporation corporation, CameraLensType lensType) throws CameraCorporationException, CameraLensTypeException {
+	public CameraLensPhoto(PhotoId id, CameraLens cameraLens) throws CameraLensException {
 		super(id);
 
 		// preconditions
-		assertLensCorporation(corporation);
-		assertLensType(lensType);
-		this.corporation = corporation;
-		this.lensType = lensType;
+		assertCameraLens(cameraLens);
+		this.cameraLens = cameraLens;
 	}
 
-	/**
-	 * @methodtype get
-	 */
-	public CameraLensCorporation getCorporation() {
-		return corporation;
-	}
-
-	/**
-	 * @methodtype set
-	 */
-	public void setCorporation(CameraLensCorporation corporation) {
-		this.corporation = corporation;
-	}
-
-	/**
-	 * @methodtype get
-	 */
-	public CameraLensType getLensType() {
-		return lensType;
-	}
-
-	/**
-	 * @methodtype set
-	 */
-	public void setLensType(CameraLensType lensType) {
-		this.lensType = lensType;
-	}
-
-	/**
-	 * @methodtype get
-	 */
-	public String getAperture() {
-		return aperture;
-	}
-
-	/**
-	 * @methodtype set
-	 */
-	public void setAperture(String aperture) {
-		this.aperture = aperture;
-	}
-
-	/**
-	 * @methodtype get
-	 */
-	public String getFocalLength() {
-		return focalLength;
-	}
-
-	/**
-	 * @methodtype set
-	 */
-	public void setFocalLength(String focalLength) {
-		this.focalLength = focalLength;
-	}
-
-	private void assertLensCorporation(CameraLensCorporation corporation) throws CameraCorporationException {
-		if (corporation == null) {
-			throw new CameraCorporationException("Camera corporation is null!");
+	private void assertCameraLens(CameraLens cameraLens) throws CameraLensException {
+		if (cameraLens == null) {
+			throw new CameraLensException("Camera lens is null!");
 		}
 	}
 
-	private void assertLensType(CameraLensType type) throws CameraLensTypeException {
-		if (type == null) {
-			throw new CameraLensTypeException("Camera lens type is null!");
-		}
+	/**
+	 * @methodtype get
+	 */
+	public CameraLens getCameraLens() {
+		return cameraLens;
 	}
+
+	/**
+	 * @methodtype set
+	 */
+	public void setCameraLens(CameraLens cameraLens) {
+		this.cameraLens = cameraLens;
+	}
+	
+	
 
 }

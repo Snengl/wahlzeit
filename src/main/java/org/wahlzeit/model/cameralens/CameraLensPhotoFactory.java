@@ -58,9 +58,8 @@ public class CameraLensPhotoFactory extends PhotoFactory {
 		return new CameraLensPhoto(id);
 	}
 
-	public Photo createPhoto(PhotoId id, CameraLensCorporation corporation, CameraLensType lensType)
-			throws CameraCorporationException, CameraLensTypeException {
-		return new CameraLensPhoto(id, corporation, lensType);
+	public Photo createPhoto(PhotoId id, CameraLens cameraLens) throws CameraLensException {
+		return new CameraLensPhoto(id, cameraLens);
 	}
 
 }

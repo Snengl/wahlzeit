@@ -2,10 +2,12 @@ package org.wahlzeit.model;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.wahlzeit.model.cameralens.CameraLens;
 import org.wahlzeit.model.cameralens.CameraLensCorporation;
 import org.wahlzeit.model.cameralens.CameraLensPhoto;
 import org.wahlzeit.model.cameralens.CameraLensType;
 import org.wahlzeit.model.cameralens.CameraLensType.LensType;
+import org.wahlzeit.model.cameralens.CameraLensTypeException;
 
 import com.google.appengine.tools.development.testing.LocalBlobstoreServiceTestConfig;
 import com.google.appengine.tools.development.testing.LocalServiceTestHelper;
@@ -20,11 +22,14 @@ public class CameraLensPhotoTest {
 			new LocalBlobstoreServiceTestConfig());
 
 	private CameraLensPhoto photo;
+	private CameraLensType zoom;
 
 	@Before
 	public void setUp() {
 		helper.setUp();
 		photo = new CameraLensPhoto();
+		zoom = new CameraLensType(LensType.ZOOM);
+
 	}
 
 	@After
@@ -33,17 +38,9 @@ public class CameraLensPhotoTest {
 	}
 
 	@Test
-	public void corporationTest() {
-		photo.setCorporation(CameraLensCorporation.NIKON);
-
-		Assert.assertEquals(CameraLensCorporation.NIKON, photo.getCorporation());
-	}
-
-	@Test
-	public void lensTypeTest() {
-		photo.setLensType(new CameraLensType(LensType.ZOOM));
-
-		Assert.assertEquals(LensType.ZOOM, photo.getLensType().getType());
+	public void cameraLensTypeTest() throws CameraLensTypeException {
+		photo.setCameraLens(new CameraLens("Super toll", zoom));
+		Assert.assertEquals(LensType.ZOOM, photo.getCameraLens().getCameraLensType().getType());
 	}
 
 }
