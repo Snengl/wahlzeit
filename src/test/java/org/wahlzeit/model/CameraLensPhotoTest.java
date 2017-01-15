@@ -5,6 +5,7 @@ import org.junit.Test;
 import org.wahlzeit.model.cameralens.CameraLensCorporation;
 import org.wahlzeit.model.cameralens.CameraLensPhoto;
 import org.wahlzeit.model.cameralens.CameraLensType;
+import org.wahlzeit.model.cameralens.CameraLensType.LensType;
 
 import com.google.appengine.tools.development.testing.LocalBlobstoreServiceTestConfig;
 import com.google.appengine.tools.development.testing.LocalServiceTestHelper;
@@ -40,9 +41,9 @@ public class CameraLensPhotoTest {
 
 	@Test
 	public void lensTypeTest() {
-		photo.setLensType(CameraLensType.ZOOM);
+		photo.setLensType(new CameraLensType(LensType.ZOOM));
 
-		Assert.assertEquals(CameraLensType.ZOOM, photo.getLensType());
+		Assert.assertEquals(LensType.ZOOM, photo.getLensType().getType());
 	}
 
 }
